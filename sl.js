@@ -1,6 +1,6 @@
 
 // doesn't quite work for multiple table - need to test this
-function sl(id, list, x){
+function sl(id, list, click_th, post_hook){
     const sorted = {}
     let col_matches = []
     let body_template = ""
@@ -106,8 +106,12 @@ function sl(id, list, x){
             clear_headers()
             ths[thi].innerHTML += " <span>"+ sort_icons[sorted[col]["order"]] +"</span>";
 
+            
+
             tb = tbody_results()
             tbody.innerHTML = tb
+
+            post_hook()
 
             previous_col = col
         })
@@ -145,5 +149,11 @@ function sl(id, list, x){
         }
         return matches
     }
+
+    // if click_th is set, click the th of that numeric position
+    if (click_th !== undefined) {
+        ths[click_th].click();
+    }
+    
 
 }
